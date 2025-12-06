@@ -11,7 +11,7 @@ tree.addEventListener('click', (e) => {
   const ul = e.target.nextElementSibling;
   let state = 'none';
 
-  if (!ul) {
+  if (ul.tagName !== 'UL') {
     return;
   }
 
@@ -23,7 +23,9 @@ tree.addEventListener('click', (e) => {
 });
 
 uls.forEach((ul) => {
-  if (ul.previousSibling.nodeType !== 3) {
+  const prev = ul.previousSibling;
+
+  if (!prev || prev.nodeType !== 3) {
     return;
   }
 
