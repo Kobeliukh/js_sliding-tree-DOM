@@ -1,6 +1,11 @@
 'use strict';
 
-const tree = document.querySelector('.tree');
+let tree;
+
+document.addEventListener('DOMContentLoaded', () => {
+  tree = document.querySelector('.tree');
+});
+
 const uls = tree.querySelectorAll('ul');
 
 tree.addEventListener('click', (e) => {
@@ -11,11 +16,11 @@ tree.addEventListener('click', (e) => {
   const ul = e.target.nextElementSibling;
   let state = 'none';
 
-  if (ul.tagName !== 'UL') {
+  if (!ul || ul.tagName !== 'UL') {
     return;
   }
 
-  if (ul.style.display === 'none') {
+  if (getComputedStyle(ul).display === 'none') {
     state = '';
   }
 
@@ -31,7 +36,7 @@ uls.forEach((ul) => {
 
   const span = document.createElement('span');
 
-  span.textContent = ul.previousSibling.textContent.trim();
+  span.textContent = prev.textContent.trim();
 
-  ul.previousSibling.replaceWith(span);
+  prev.replaceWith(span);
 });
